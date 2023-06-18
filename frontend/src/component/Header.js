@@ -9,14 +9,14 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   // useState will always be inverted from T to F and vice versa using this fn
-  const handleShowMenu = () =>{
-    setShowMenu(preve => !preve)
-  }
+  const handleShowMenu = () => {
+    setShowMenu((preve) => !preve);
+  };
   return (
     // px: padding from left and right (x-axis)
-    // mobile version it is 2, desktop it is 4 decalred in header class
+    // mobile version it is 2, desktop it is 4 declared in header class
 
-    <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50">
+    <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white-100">
       {/* desktop version */}
 
       {/* centers the icon perfectly in the header bar vertically and justify-between spaces them to the extremes*/}
@@ -47,9 +47,16 @@ const Header = () => {
             </div>
 
             {showMenu && (
-              <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md">
-                <p className="whitespace-nowrap cursor-pointer">New Product</p>
-                <p className="whitespace-nowrap cursor-pointer">Login</p>
+              <div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col">
+                <Link
+                  to={"newproduct"}
+                  className="whitespace-nowrap cursor-pointer"
+                >
+                  New Product
+                </Link>
+                <Link to={"login"} className="whitespace-nowrap cursor-pointer">
+                  Login
+                </Link>
               </div>
             )}
           </div>
