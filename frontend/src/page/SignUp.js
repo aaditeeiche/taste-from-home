@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import signupvid from "../imgs/signup.gif";
 import { BiHide, BiShowAlt } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ImageToBase64 } from "../utility/imagetoBase64";
 
-const SignUp = () => {
+function SignUp() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [data, setData] = useState({
@@ -12,6 +14,7 @@ const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    image: "",
   });
 
   console.log(data);
@@ -28,19 +31,34 @@ const SignUp = () => {
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((preve) => {
-      return { ...(preve[name] = value) };
+      return { ...preve, [name]: value };
+    });
+  };
+
+  // handles asynchronous operations using promise (eventual completion/failure)
+  const handleUploadProfileImage = async (e) => {
+    // pending state of asynchronous operation
+    const data = await ImageToBase64(e.target.files[0]);
+    console.log(data);
+
+    setData((preve) => {
+      return {
+        ...preve,
+        image: data,
+      };
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // prevents the page from refreshing when the submit button is clicked so the data is intact in the form to be handled further
-    const { firstName, email, password, confirmPassword } = data //extract all the mandatory data from the form into const var
+    const { firstName, email, password, confirmPassword } = data; //extract all the mandatory data from the form into const var
     if (firstName && email && password && confirmPassword) {
       //this makes sure that these fields are non-empty
       if (password === confirmPassword) {
-        //if this is verified, then send all data to the server
+        //if this is verified, then send all data to the server and navigate to login page
         alert("Successfully Registered Account");
+        navigate("/login");
       } else {
         alert("Error: Passwords do not Match");
       }
@@ -53,8 +71,21 @@ const SignUp = () => {
     <div className="p-3 md:p-4">
       <div className="w-full max-w-sm bg-white m-auto flex flex-col p-4">
         {/* <h1 className='text-center test-2xl font-bold'>SIGN UP</h1> */}
-        <div className="w-20 overflow-hidden drop-shadow-md rounded-full shadow-md m-auto">
-          <img src={signupvid} className="w-full" />
+        <div className="w-20 h-20 overflow-hidden drop-shadow-md rounded-full shadow-md m-auto relative cursor-pointer">
+          <img src={data.image ? data.image : signupvid} className="w-full h-full" alt="upload profile img" />
+
+          <label htmlFor="profileImage">
+            <div className="absolute bottom-0 p-1 bg-slate-400 opacity-60 w-full text-center h-1/3">
+              <p className="text-xs text-white cursor-pointer">Upload</p>
+            </div>
+            <input
+              type="file"
+              id="profileImage"
+              accept="image/*"
+              className="hidden"
+              onChange={handleUploadProfileImage}
+            />
+          </label>
         </div>
 
         <form className="w-full py-2 flex flex-col" onSubmit={handleSubmit}>
@@ -106,7 +137,7 @@ const SignUp = () => {
             </span>
           </div>
 
-          <label htmlFor="confirmpassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirm Password</label>
           <div className="flex px-1 py-1 bg-slate-200 rounded mt-1 mb-2 focus-within:outline focus-within:outline-blue-300">
             <input
               type={showConfirmPassword ? "text" : "password"}
@@ -134,13 +165,13 @@ const SignUp = () => {
 
         <p className="text-left text-sm mt-2 m-auto">
           Already Resistered with an Account?{" "}
-          <Link to={"login"} className="text-red-500 underline">
+          <Link to={"/login"} className="text-red-500 underline">
             Login
           </Link>
         </p>
       </div>
     </div>
   );
-};
+}
 
 export default SignUp;
