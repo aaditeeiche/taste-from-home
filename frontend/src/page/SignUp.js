@@ -3,6 +3,7 @@ import signupvid from "../imgs/signup.gif";
 import { BiHide, BiShowAlt } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { ImageToBase64 } from "../utility/imagetoBase64";
+import { toast } from "react-hot-toast";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -49,16 +50,31 @@ function SignUp() {
     });
   };
 
-  const handleSubmit = (e) => {
+  console.log(process.env.REACT_APP_SERVER_DOMAIN);
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // prevents the page from refreshing when the submit button is clicked so the data is intact in the form to be handled further
     const { firstName, email, password, confirmPassword } = data; //extract all the mandatory data from the form into const var
     if (firstName && email && password && confirmPassword) {
-      //this makes sure that these fields are non-empty
+      //this m akes sure that these fields are non-empty
       if (password === confirmPassword) {
         //if this is verified, then send all data to the server and navigate to login page
-        alert("Successfully Registered Account");
-        navigate("/login");
+        const fetchData = await fetch(
+          `${process.env.REACT_APP_SERVER_DOMAIN}/signup`,
+          {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(data),
+          }
+        );
+
+        const dataRes = await fetchData.json();
+        console.log(dataRes);
+        // alert(dataRes.message);
+        toast(dataRes.message);
+        if (dataRes.alert) {
+          navigate("/login");
+        }
       } else {
         alert("Error: Passwords do not Match");
       }
@@ -72,7 +88,11 @@ function SignUp() {
       <div className="w-full max-w-sm bg-white m-auto flex flex-col p-4">
         {/* <h1 className='text-center test-2xl font-bold'>SIGN UP</h1> */}
         <div className="w-20 h-20 overflow-hidden drop-shadow-md rounded-full shadow-md m-auto relative cursor-pointer">
-          <img src={data.image ? data.image : signupvid} className="w-full h-full" alt="upload profile img" />
+          <img
+            src={data.image ? data.image : signupvid}
+            className="w-full h-full"
+            alt="upload profile img"
+          />
 
           <label htmlFor="profileImage">
             <div className="absolute bottom-0 p-1 bg-slate-400 opacity-60 w-full text-center h-1/3">

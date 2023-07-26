@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import signupvid from "../imgs/signup.gif";
 import { BiHide, BiShowAlt } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRedux } from "../redux/userSlice";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
+  const navigate = useNavigate();
 
-  console.log(data);
+  const userData = useSelector((state) => state);
+  console.log(userData.user);
+
+  const dispatch = useDispatch();
 
   const handleShowPassword = () => {
     setShowPassword((preve) => !preve);
@@ -27,13 +31,32 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // prevents the page from refreshing when the submit button is clicked so the data is intact in the form to be handled further
     const { email, password } = data; //extract all the mandatory data from the form into const var
     if (email && password) {
-      //this makes sure that these fields are non-empty
-      alert("Login Successful");
+      const fetchData = await fetch(
+        `${process.env.REACT_APP_SERVER_DOMAIN}/login`,
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const dataRes = await fetchData.json();
+      console.log(dataRes);
+      console.log(userData);
+      toast(dataRes.message);
+      if (dataRes.alert) {
+        dispatch(loginRedux(dataRes));
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      }
+
+      console.log(userData);
     } else {
       alert("Please Enter All Required Details");
     }

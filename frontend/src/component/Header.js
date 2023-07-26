@@ -3,11 +3,13 @@ import logo from "../imgs/logo.jpg";
 import { FaUserAlt } from "react-icons/fa";
 import { BsCartFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   // create a new state to create drop down menu and set default as false
   const [showMenu, setShowMenu] = useState(false);
-
+  const userData = useSelector((state) => state.user);
+  console.log(userData);
   // useState will always be inverted from T to F and vice versa using this fn
   const handleShowMenu = () => {
     setShowMenu((preve) => !preve);
