@@ -13,7 +13,7 @@ console.log(process.env.MONGODB_URL);
 mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGODB_URL)
-  .then(() => console.log("Connect to Database"))
+  .then(() => console.log("Connect to Taste From Home Database"))
   .catch((err) => console.log(err));
 
 //schema
@@ -85,13 +85,13 @@ app.post("/login", (req, res) => {
         };
         console.log(dataSend);
         res.send({
-          message: "Login is Successful",
+          message: "Login Successful",
           alert: true,
           data: dataSend,
         });
       } else {
         res.send({
-          message: "Email Id not found!! Please Sign Up.",
+          message: "Email ID not found. Please Register first!",
           alert: false,
         });
       }
@@ -100,4 +100,4 @@ app.post("/login", (req, res) => {
       console.log(err);
     });
 });
-app.listen(PORT, () => console.log("server is running at port: " + PORT));
+app.listen(PORT, () => console.log("Server is Running at PORT : " + PORT));
