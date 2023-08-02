@@ -100,4 +100,23 @@ app.post("/login", (req, res) => {
       console.log(err);
     });
 });
+
+//product section
+const schemaProduct = mongoose.Schema({
+  name: String,
+  catagory: String,
+  image: String,
+  price: String,
+  description: String,
+});
+const productModel = mongoose.model("product", schemaProduct);
+
+app.post("/uploadProduct", async (req, res) => {
+  console.log(req.body);
+  const data = await productModel(req.body);
+  const datasave = await data.save();
+  res.send({ message: "Upload Successful" });
+});
+
+//server is running
 app.listen(PORT, () => console.log("Server is Running at PORT : " + PORT));
