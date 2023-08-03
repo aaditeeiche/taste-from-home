@@ -32,7 +32,7 @@ const Header = () => {
     // px: padding from left and right (x-axis)
     // mobile version it is 2, desktop it is 4 declared in header class
 
-    <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white-900">
+    <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white">
       {/* desktop version */}
 
       {/* centers the icon perfectly in the header bar vertically and justify-between spaces them to the extremes*/}

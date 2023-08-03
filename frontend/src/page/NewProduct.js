@@ -72,7 +72,7 @@ const NewProduct = () => {
         };
       });
     } else {
-      toast("Enter required Field(s)!!");
+      toast("Please enter required field(s)");
     }
   };
   return (

@@ -56,9 +56,9 @@ const About = () => {
           <br />
           <br />
           <br />
-          <div className="text-center">Looking Forward to serving You!!</div>
+          <div className="text-center">Looking Forward to Serving You!!</div>
           <br />
-          <div className="text-center">😀 Happy Shopping 😀</div>
+          <div className="text-center">😀 Happy Shopping! 😀</div>
         </p>
         <p className="flex flex-col"></p>
         <p></p>
