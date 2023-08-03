@@ -1,10 +1,10 @@
 import React from "react";
-import Nan_Khatai from "../snacksimgs/bengani/Nan Khatai_Rose Flavor_Rajvi.jpeg";
+import Nan_Khatai from "../snacksimgs/karishma/Nan Khatai_Rose Flavor_Rajvi.jpeg";
 import Sukhadi from "../snacksimgs/radha/Sukhadi-Gud Papdi_Radha.jpeg";
 import Thekua from "../snacksimgs/vini/Thekua_Vini.jpg";
 import Gujiya from "../snacksimgs/sumitra/Gujiya_Sumitra.jpeg";
-import Nimki from "../snacksimgs/bengani/Nimki_Namakpare_Rajvi.jpeg";
-import Gulab_Jamun from "../snacksimgs/karishma/Gulab Jamun_Vandana.jpeg";
+import Nimki from "../snacksimgs/karishma/Nimki_Namakpare_Rajvi.jpeg";
+import Gulab_Jamun from "../snacksimgs/vandana/Gulab Jamun_Vandana.jpeg";
 
 const About = () => {
   return (
@@ -23,7 +23,7 @@ const About = () => {
         all the Desi Food Lovers
       </p>
       <section className="flex w-full">
-        <div className="h-fit w-screen flex flex-col overflow-hidden gap-10">
+        <div className="h-fit w-screen flex flex-col overflow-hidden gap-10 md:auto">
           <img
             className="ml-2 rounded-full"
             src={Nan_Khatai}

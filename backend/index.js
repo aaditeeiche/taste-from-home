@@ -108,6 +108,8 @@ const schemaProduct = mongoose.Schema({
   image: String,
   price: String,
   description: String,
+  seller: String,
+  quantity: String,
 });
 const productModel = mongoose.model("product", schemaProduct);
 
@@ -116,6 +118,11 @@ app.post("/uploadProduct", async (req, res) => {
   const data = await productModel(req.body);
   const datasave = await data.save();
   res.send({ message: "Upload Successful" });
+});
+
+app.get("/product", async (req, res) => {
+  const data = await productModel.find({});
+  res.send(JSON.stringify(data));
 });
 
 //server is running

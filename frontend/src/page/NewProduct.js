@@ -10,6 +10,8 @@ const NewProduct = () => {
     image: "",
     price: "",
     description: "",
+    quantity: "",
+    seller: "",
   });
 
   const handleOnChange = (e) => {
@@ -40,9 +42,9 @@ const NewProduct = () => {
     e.preventDefault();
     console.log(data);
 
-    const { name, image, catagory, price } = data;
+    const { name, image, catagory, price, seller, quantity } = data;
 
-    if (name && image && catagory && price) {
+    if (name && image && catagory && price && seller && quantity) {
       const fetchData = await fetch(
         `${process.env.REACT_APP_SERVER_DOMAIN}/uploadProduct`,
         {
@@ -62,6 +64,8 @@ const NewProduct = () => {
         return {
           name: "",
           catagory: "",
+          seller: "",
+          quantity: "",
           image: "",
           price: "",
           description: "",
@@ -70,8 +74,7 @@ const NewProduct = () => {
     } else {
       toast("Enter required Field(s)!!");
     }
-  }; // CONTINUTE WORKING FROM THIS FUNCTION. ALSO NOTICE THE BRACKET ERROR IDK HOW TO FIX IT YET - AADITEE (2-Aug)
-
+  };
   return (
     <div className="p-4">
       <form
@@ -87,6 +90,40 @@ const NewProduct = () => {
           value={data.name}
         />
 
+        <label htmlFor="quantity" className="my-1">
+          Quantity
+        </label>
+        <select
+          className="bg-green-100 p-1 my-1"
+          id="quantity"
+          name="quantity"
+          onChange={handleOnChange}
+          value={data.quantity}
+        >
+          <option value={"other"}>Select Quantity</option>
+          <option value={"0.5 Kg"}>0.5 Kg</option>
+          <option value={"1 Kg"}>1 Kg</option>
+        </select>
+
+        <label htmlFor="seller" className="my-1">
+          Seller
+        </label>
+        <select
+          className="bg-green-100 p-1 my-1"
+          id="seller"
+          name="seller"
+          onChange={handleOnChange}
+          value={data.seller}
+        >
+          <option value={"other"}>Select Seller</option>
+          {/* <option value={"Vandana"}>Vandana</option> */}
+          {/* <option value={"Karishma"}>Karishma</option> */}
+          <option value={"Vini"}>Vini</option>
+          <option value={"Sumitra"}>Sumitra</option>
+          <option value={"Radha"}>Radha</option>
+          <option value={"Baker's Delight"}>Baker's Delight</option>
+        </select>
+
         <label htmlFor="catagory" className="my-1">
           Catagory
         </label>
@@ -100,6 +137,7 @@ const NewProduct = () => {
           <option value={"other"}>Select Catagory</option>
           <option value={"Sweets - Laddu/Barfi"}>Sweets - Laddu/Barfi</option>
           <option value={"Sweets - Traditional"}>Sweets - Traditional</option>
+          <option value={"Bakery"}>Bakery Product</option>
           <option value={"Namkeen - Farsaan"}>Namkeen - Farsaan</option>
         </select>
 
@@ -107,7 +145,7 @@ const NewProduct = () => {
           Image
           <div className="h-40 w-full bg-green-100 rounded flex items-center justify-center cursor-pointer">
             {data.image ? (
-              <img src={data.image} className="h-full" />
+              <img src={data.image} className="h-full" alt="Data img" />
             ) : (
               <span className="text-5xl">
                 <BsCloudUpload />

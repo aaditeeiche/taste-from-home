@@ -12,10 +12,10 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   // this will fetch the data from the user and store it in a const variable, pass a callback functon in const userData:
   const userData = useSelector((state) => state.user);
-  console.log(userData);
+  // console.log(userData);
   // useState will always be inverted from T to F and vice versa using this fn
 
-  const dispatch = useDispatch() // from react-redux
+  const dispatch = useDispatch(); // from react-redux
 
   const handleShowMenu = () => {
     setShowMenu((preve) => !preve);
@@ -23,10 +23,11 @@ const Header = () => {
 
   const handleLogOut = () => {
     // remove the data from the redux after logging out
-    dispatch(logoutRedux())
-    toast("Logged Out Successfully")
-  }
+    dispatch(logoutRedux());
+    toast("Logged Out Successfully");
+  };
 
+  // console.log(process.env.REACT_APP_ADMIN_EMAIL);
   return (
     // px: padding from left and right (x-axis)
     // mobile version it is 2, desktop it is 4 declared in header class
@@ -58,23 +59,43 @@ const Header = () => {
           </div>
           <div className="text-l text-slate-600" onClick={handleShowMenu}>
             <div className="cursor-pointer w-10 h-10 rounded-full overflow-hidden border-2 border-solid border-slate-600 drop-shadow-md">
-              {userData.image ? <img src={userData.image} className="h-full w-full" alt="current user profile"/> : <FaUserAlt className="h-full w-full p-2"/>
-              }
+              {userData.image ? (
+                <img
+                  src={userData.image}
+                  className="h-full w-full"
+                  alt="current user profile"
+                />
+              ) : (
+                <FaUserAlt className="h-full w-full p-2" />
+              )}
             </div>
 
             {showMenu && (
               <div className="absolute right-2 bg-white py-2 shadow drop-shadow-md flex flex-col">
-                <Link
-                  to={"newproduct"}
-                  className="whitespace-nowrap cursor-pointer px-2"
-                >
-                  New Product
-                </Link>
-                {
-                  userData.image ? <p className="cursor-pointer text-white bg-red-500 px-2" onClick={handleLogOut}>Log Out</p> : <Link to={"login"} className="whitespace-nowrap cursor-pointer px-2">
-                  Login
-                </Link>
-                }
+                {(userData.email === process.env.REACT_APP_ADMIN1_EMAIL ||
+                  userData.email === process.env.REACT_APP_ADMIN2_EMAIL) && (
+                  <Link
+                    to={"newproduct"}
+                    className="whitespace-nowrap cursor-pointer px-2"
+                  >
+                    New Product
+                  </Link>
+                )}
+                {userData.image ? (
+                  <p
+                    className="cursor-pointer text-white bg-red-500 px-2"
+                    onClick={handleLogOut}
+                  >
+                    Log Out ({userData.firstName})
+                  </p>
+                ) : (
+                  <Link
+                    to={"login"}
+                    className="whitespace-nowrap cursor-pointer px-2"
+                  >
+                    Login
+                  </Link>
+                )}
               </div>
             )}
           </div>
