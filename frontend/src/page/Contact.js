@@ -4,7 +4,7 @@ import { AiOutlineMail } from "react-icons/ai";
 
 const Contact = () => {
   return (
-    <section className="flex px-20 gap-2 flex-col w-fit h-screen text-xl bg-slate-100">
+    <section className="flex px-20 gap-2 flex-col text-xl bg-slate-100 overflow-hidden">
       <div className="bg-green-200 w-screen h-max flex p-4 text-center text-4xl italic shadow ">
         Contact Us
       </div>

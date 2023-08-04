@@ -8,7 +8,7 @@ import Gulab_Jamun from "../snacksimgs/vandana/Gulab Jamun_Vandana.jpeg";
 
 const About = () => {
   return (
-    <section className="m-2 gap-2 flex flex-col">
+    <section className="m-2 gap-2 flex flex-col overflow-hidden">
       <h1
         to={"about"}
         className="bg-slate-800 text-5xl text-white p-4 text-center w-screen shadow m-10 ml-0"

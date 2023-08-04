@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import HomeCard from "../component/HomeCard";
 import CardFeature from "../component/CardFeature";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import FilterProduct from "../component/FilterProduct";
+import { useEffect } from "react";
+import AllProduct from "../component/AllProduct";
 
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
@@ -29,16 +31,13 @@ const Home = () => {
   // const homeProductCartList3 = productData.slice(4, 5);
   // const homeProductCartList4 = productData.slice(6, 7);
 
-  const catagoryList = [...new Set(productData.map(el=>el.catagory))]
-  console.log(catagoryList)
-
   return (
-    <div className="p-2 md:p-4">
+    <div className="p-2 md:p-4 overflow-hidden">
       <div className="md:flex gap-4 py-2">
-        <div className="w-1/2">
-          <h2 className="text-4xl md:text-7xl font-bold text-slate-800">
+        <div className="w-2/5">
+          <h2 className="text-4xl md:text-6xl font-bold text-slate-800">
             Welcome to
-            <span className="text-green-600"> Taste From Home</span>
+            <span className="text-green-600 md:text-7xl"> Taste From Home</span>
             {/* <br /> Order Super-tasty and Healthy Home-made delicacies and have
             it delivered right at your doorstep. */}
           </h2>
@@ -54,12 +53,13 @@ const Home = () => {
           </button>
         </div>
 
-        <div className="w-1/2 flex flex-wrap gap-5 p-4 justify-center">
+        <div className="w-3/5 flex flex-wrap gap-5 p-4 justify-center">
           {homeProductCartList[0]
             ? homeProductCartList.map((el) => {
                 return (
                   <HomeCard
                     key={el._id}
+                    id={el._id}
                     image={el.image}
                     name={el.name}
                     price={el.price}
@@ -104,6 +104,7 @@ const Home = () => {
                 return (
                   <CardFeature
                     key={el._id}
+                    id={el._id}
                     name={el.name}
                     catagory={el.catagory}
                     price={el.price}
@@ -118,17 +119,8 @@ const Home = () => {
               ))}
         </div>
       </div>
-      <div className="my-5">
-        <h2 className="font-bold text-2xl text-green-800 mb-4">
-          Your Products
-        </h2>
-        <div className="flex gap-4 justify-center">
-          <FilterProduct catagory="Sweets - Traditional"/>
-          <FilterProduct catagory=""/>
-          <FilterProduct/>
-          <FilterProduct/>
-        </div>
-      </div>
+
+      <AllProduct heading={"Your Products"} />
     </div>
   );
 };
