@@ -26,7 +26,7 @@ const AllProduct = ({ heading }) => {
   };
 
   return (
-    <div className="my-5 w-screen overflow  -hidden">
+    <div className="my-5 w-screen overflow-hidden">
       <h2 className="font-bold text-2xl text-green-800 mb-4">{heading}</h2>
       <div className="flex gap-4 justify-center overflow-scroll scrollbar-none">
         {catagoryList[0] &&
@@ -38,10 +38,6 @@ const AllProduct = ({ heading }) => {
               />
             );
           })}
-
-        {/* <FilterProduct catagory="" />
-    <FilterProduct />
-    <FilterProduct /> */}
       </div>
       <div className="flex flex-wrap justify-center gap-4 my-4">
         {dataFilter.map((el) => {
