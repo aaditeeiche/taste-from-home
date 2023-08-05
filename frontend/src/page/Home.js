@@ -78,7 +78,7 @@ const Home = () => {
       <div className="">
         <div className="flex w-full items-center">
           <h2 className="font-bold text-2xl text-green-800 mb-4">
-            Sweets: Laddu and Barfi
+            Featured - Sweets: Laddu and Barfi
           </h2>
           <div className="ml-auto flex gap-4">
             <button
@@ -120,7 +120,7 @@ const Home = () => {
         </div>
       </div>
 
-      <AllProduct heading={"Your Products"} />
+      <AllProduct heading={"Shop for Delicious Products"} />
     </div>
   );
 };

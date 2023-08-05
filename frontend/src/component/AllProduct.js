@@ -11,6 +11,7 @@ const AllProduct = ({ heading }) => {
   //filter data display
   const [filterby, setFilterBy] = useState("");
   const [dataFilter, setDataFilter] = useState([]);
+  const loadingArrayFeature = new Array(10).fill(null);
 
   useEffect(() => {
     setDataFilter(productData);
@@ -29,7 +30,7 @@ const AllProduct = ({ heading }) => {
     <div className="my-5 w-screen overflow-hidden">
       <h2 className="font-bold text-2xl text-green-800 mb-4">{heading}</h2>
       <div className="flex gap-4 justify-center overflow-scroll scrollbar-none">
-        {catagoryList[0] &&
+        {catagoryList[0] ? (
           catagoryList.map((el) => {
             return (
               <FilterProduct
@@ -37,23 +38,32 @@ const AllProduct = ({ heading }) => {
                 onClick={() => handleFilterProduct(el)}
               />
             );
-          })}
+          })
+        ) : (
+          <div className="min-h-[150px] flex justify-center items-center">
+            <p>Loading...</p>
+          </div>
+        )}
       </div>
       <div className="flex flex-wrap justify-center gap-4 my-4">
-        {dataFilter.map((el) => {
-          return (
-            <CardFeature
-              key={el._id}
-              id={el._id}
-              image={el.image}
-              name={el.name}
-              catagory={el.catagory}
-              seller={el.seller}
-              price={el.price}
-              quantity={el.quantity}
-            />
-          );
-        })}
+        {dataFilter[0]
+          ? dataFilter.map((el) => {
+              return (
+                <CardFeature
+                  key={el._id}
+                  id={el._id}
+                  image={el.image}
+                  name={el.name}
+                  catagory={el.catagory}
+                  seller={el.seller}
+                  price={el.price}
+                  quantity={el.quantity}
+                />
+              );
+            })
+          : loadingArrayFeature.map((el) => (
+              <CardFeature loading="Loading..." />
+            ))}
       </div>
     </div>
   );

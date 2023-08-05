@@ -33,11 +33,10 @@ const CardFeature = ({
               </span>
             </p>
             <p className="text-green-400 font-small italic"> ~ by {seller}</p>
-
-            <button className="bg-yellow-500 py-1 my-2 mt-2 rounded hover:bg-yellow-600 w-full">
-              Add to Cart
-            </button>
           </Link>
+          <button className="bg-yellow-500 py-1 my-2 mt-2 rounded hover:bg-yellow-600 w-full">
+            Add to Cart
+          </button>
         </>
       ) : (
         <div className="min-h-[150px] flex justify-center items-center">
