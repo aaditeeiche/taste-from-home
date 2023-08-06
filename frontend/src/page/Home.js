@@ -96,7 +96,7 @@ const Home = () => {
           </div>
         </div>
         <div
-          className="flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all"
+          className="flex gap-2 md:gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all"
           ref={slideProductRef}
         >
           {homeProductCartListSweetLadduBarfi[0]

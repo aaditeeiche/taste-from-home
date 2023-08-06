@@ -10,7 +10,7 @@ const Menu = () => {
   const productDisplay = productData.filter((el) => el._id == filterby)[0];
   console.log(productDisplay);
   return (
-    <div className="p-2 md:p-4 ">
+    <div className="p-2 md:p-4 overflow-hidden">
       <div className="w-full max-w-[950px] m-auto md:flex bg-white">
         <div className="max-w-sm overflow-hidden w-full p-5">
           <img

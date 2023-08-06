@@ -23,7 +23,7 @@ const About = () => {
         all the Desi Food Lovers
       </p>
       <section className="flex w-full">
-        <div className="h-fit w-screen flex flex-col overflow-hidden gap-10 md:auto">
+        <div className=" h-fit w-screen flex flex-col overflow-hidden gap-10 md:auto">
           <img
             className="ml-2 rounded-full"
             src={Nan_Khatai}
@@ -36,7 +36,7 @@ const About = () => {
           <img src={Gulab_Jamun} className="ml-2" alt="Gulab jamun" /> */}
         </div>
 
-        <p className="text-2xl text-justify text-center p-10 flex-adjust pt-0 italic">
+        <p className=" text-md md:text-2xl text-justify p-10 flex-adjust pt-0 italic">
           Welcome to Taste from Home, the ultimate online destination for home
           made snacks and sweets. We at Taste From Home, are a team of
           passionate foodies who believe that nothing beats the taste and
