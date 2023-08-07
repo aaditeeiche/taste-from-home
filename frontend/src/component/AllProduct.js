@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const AllProduct = ({ heading }) => {
   const productData = useSelector((state) => state.product.productList);
   const catagoryList = [...new Set(productData.map((el) => el.catagory))];
-  console.log(catagoryList);
+  // console.log(catagoryList);
 
   //filter data display
   const [filterby, setFilterBy] = useState("");
@@ -35,6 +35,7 @@ const AllProduct = ({ heading }) => {
             return (
               <FilterProduct
                 catagory={el}
+                key={el}
                 onClick={() => handleFilterProduct(el)}
               />
             );
@@ -50,7 +51,7 @@ const AllProduct = ({ heading }) => {
           ? dataFilter.map((el) => {
               return (
                 <CardFeature
-                  key={el._id}
+                  key={el._id + "cardFeature-AP"}
                   id={el._id}
                   image={el.image}
                   name={el.name}
@@ -61,8 +62,8 @@ const AllProduct = ({ heading }) => {
                 />
               );
             })
-          : loadingArrayFeature.map((el) => (
-              <CardFeature loading="Loading..." />
+          : loadingArrayFeature.map((el, index) => (
+              <CardFeature loading="Loading..." key={index + "allProduct"} />
             ))}
       </div>
     </div>

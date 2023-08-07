@@ -27,7 +27,10 @@ const Header = () => {
     toast("Logged Out Successfully");
   };
 
-  // console.log(process.env.REACT_APP_ADMIN_EMAIL);
+  const cartItemNumber = useSelector((state) => state.product.cartItem);
+
+  console.log(cartItemNumber[0]);
+  console.log(cartItemNumber[1]);
   return (
     // px: padding from left and right (x-axis)
     // mobile version it is 2, desktop it is 4 declared in header class
@@ -44,7 +47,7 @@ const Header = () => {
         </Link>
 
         <div className="flex items-center gap-4 md:gap-7">
-          <nav className="flex gap-4 md:gap-6 text-base md:text-lg hidden md:flex ">
+          <nav className=" flex gap-4 md:gap-6 text-base md:text-lg ">
             <Link to={""}>Home</Link>
             <Link to={"menu/64cb4e2197d27053c1cc5d15"}>Menu</Link>
             <Link to={"about"}>About</Link>
@@ -55,7 +58,7 @@ const Header = () => {
             <Link to={"cart"}>
               <BsCartFill />
               <div className="absolute -top-1 -right-1 text-white bg-red-500 h-4 w-4 rounded-full m-0 p-0 text-base text-center text-xs">
-                0
+                {cartItemNumber.length}
               </div>
             </Link>
           </div>

@@ -9,13 +9,13 @@ import AllProduct from "../component/AllProduct";
 
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
-  console.log(productData);
+  // console.log(productData);
   const homeProductCartList = productData.slice(1, 5);
   const homeProductCartListSweetLadduBarfi = productData.filter(
     (el) => el.catagory === "Sweets - Laddu/Barfi",
     []
   );
-  console.log(homeProductCartListSweetLadduBarfi);
+  // console.log(homeProductCartListSweetLadduBarfi);
 
   const loadingArray = new Array(4).fill(null);
   const loadingArrayFeature = new Array(10).fill(null);
@@ -70,7 +70,9 @@ const Home = () => {
                 );
               })
             : loadingArray.map((el, index) => {
-                return <HomeCard key={index} loading={"Loading..."} />;
+                return (
+                  <HomeCard key={index + "loading"} loading={"Loading..."} />
+                );
               })}
         </div>
       </div>
@@ -103,7 +105,7 @@ const Home = () => {
             ? homeProductCartListSweetLadduBarfi.map((el) => {
                 return (
                   <CardFeature
-                    key={el._id}
+                    key={el._id + "bakery"}
                     id={el._id}
                     name={el.name}
                     catagory={el.catagory}
@@ -114,8 +116,8 @@ const Home = () => {
                   />
                 );
               })
-            : loadingArrayFeature.map((el) => (
-                <CardFeature loading="Loading..." />
+            : loadingArrayFeature.map((el, index) => (
+                <CardFeature loading="Loading..." key={index + "cartLoading"} />
               ))}
         </div>
       </div>
