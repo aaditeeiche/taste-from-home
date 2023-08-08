@@ -6,13 +6,19 @@ const Cart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem);
   console.log(productCartItem);
   return (
-    <div className="p-2 md:p-4">
+    <div className="p-2 md:p-4 relative ">
+      {/* 
+      bg-gradient-to-r from-orange-400 via-white to-green-500
+      <img
+        src={BG}
+        className="w-screen h-screen absolute overflow-hidden m-0"
+      /> */}
       <h2 className="text-lg md:text-2xl text-slate-600 font-bold">
         Your Cart Items
       </h2>
-      <div>
-        <div className="">
-          <div className="">
+      <div className="">
+        <div className="w-full max-w-3xl">
+          <div className="my-4">
             {productCartItem.map((el) => {
               return (
                 <CartProduct
