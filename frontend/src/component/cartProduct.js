@@ -1,5 +1,12 @@
 import React from "react";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import {
+  deleteCartItem,
+  increaseQty,
+  decreaseQty,
+} from "../redux/productSlice";
 
 const CartProduct = ({
   id,
@@ -12,12 +19,17 @@ const CartProduct = ({
   qty,
   total,
 }) => {
+  const dispatch = useDispatch();
   return (
     <div className=" bg-slate-200 p-2 flex gap-4 hover:shadow-sm hover:shadow-teal-400 border-2 border-slate-300 m-2">
-      <div className=" bg-white p-3 rounded overflow-hidden">
-        <img src={image} alt="img" className="h-28 w-36 object-cover p-3" />
+      <div className=" bg-white p-1 rounded overflow-hidden">
+        <img
+          src={image}
+          alt="img"
+          className="w-fit h-fit max-h-40 max-w-40 object-cover p-3"
+        />
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 w-full">
         <h3 className="font-semibold text-slate-800 capitalise word-wrap text-lg md:text-xl">
           {name}
         </h3>
@@ -32,22 +44,31 @@ const CartProduct = ({
             ~ by {seller}
           </span>
         </p>
-        <div>
+        <div className="flex justify-between">
           <div className="flex gap-3 items-center p-1">
-            <button className="bg-slate-300 p-1 my-2 mt-2 rounded-full hover:bg-slate-400">
+            <button
+              onClick={() => dispatch(increaseQty(id))}
+              className="bg-slate-300 p-1 my-2 mt-2 rounded-full hover:bg-slate-400"
+            >
               <FiPlus />
             </button>
             <p className="pb-1 font-semibold">{qty}</p>
             <button
-              onClick={""}
+              onClick={() => dispatch(decreaseQty(id))}
               className="bg-slate-300 p-1 my-2 mt-2 rounded-full hover:bg-slate-400"
             >
               <FiMinus />
             </button>
+            <button
+              onClick={() => dispatch(deleteCartItem(id))}
+              className=" p-1 my-2 mt-2 ml-4 hover:rounded-full hover:bg-red-500 cursor-pointer"
+            >
+              <AiOutlineDelete />
+            </button>
           </div>
-          <div>
-            <p>Total</p>
-            <p>{total}</p>
+          <div className="flex items-center gap-2 font-bold text-slate-700">
+            <p>Total :</p>
+            <p>{total * qty}</p>
           </div>
         </div>
       </div>
