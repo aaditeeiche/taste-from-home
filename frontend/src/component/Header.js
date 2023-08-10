@@ -29,8 +29,6 @@ const Header = () => {
 
   const cartItemNumber = useSelector((state) => state.product.cartItem);
 
-  console.log(cartItemNumber[0]);
-  console.log(cartItemNumber[1]);
   return (
     // px: padding from left and right (x-axis)
     // mobile version it is 2, desktop it is 4 declared in header class

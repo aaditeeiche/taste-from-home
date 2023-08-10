@@ -18,6 +18,7 @@ const AllProduct = ({ heading }) => {
   }, [productData]);
 
   const handleFilterProduct = (catagory) => {
+    setFilterBy(catagory);
     const filter = productData.filter(
       (el) => el.catagory.toLowerCase() === catagory.toLowerCase()
     );
@@ -36,6 +37,7 @@ const AllProduct = ({ heading }) => {
               <FilterProduct
                 catagory={el}
                 key={el}
+                isActive={el.toLowerCase() === filterby.toLowerCase()}
                 onClick={() => handleFilterProduct(el)}
               />
             );

@@ -15,15 +15,22 @@ export const productSlice = createSlice({
       state.productList = [...action.payload];
     },
     addCartItem: (state, action) => {
-      console.log(action);
-      const total = action.payload.price;
-      state.cartItem = [
-        ...state.cartItem,
-        { ...action.payload, qty: 1, total: total },
-      ];
+      // console.log(action);
+      const check = state.cartItem.some((el) => el._id === action.payload._id);
+      if (check) {
+        toast("Item Already added to cart.");
+        // const index = state.cartItem.findIndex((el) => el._id === action.payload);
+      } else {
+        toast("Item Added successfully");
+        const total = action.payload.price;
+        state.cartItem = [
+          ...state.cartItem,
+          { ...action.payload, qty: 1, total: total },
+        ];
+      }
     },
     deleteCartItem: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       toast("One Item Deleted!!");
       const index = state.cartItem.findIndex((el) => el._id === action.payload);
       state.cartItem.splice(index, 1);
@@ -32,9 +39,27 @@ export const productSlice = createSlice({
     increaseQty: (state, action) => {
       const index = state.cartItem.findIndex((el) => el._id === action.payload);
       let qty = state.cartItem[index].qty;
-      state.cartItem[index].qty = ++qty;
+      const qtyInc = ++qty;
+      state.cartItem[index].qty = qtyInc;
+
+      const price = state.cartItem[index].price;
+      const total = price * qtyInc;
+
+      state.cartItem[index].total = total;
     },
-    decreaseQty: (state, action) => {},
+    decreaseQty: (state, action) => {
+      const index = state.cartItem.findIndex((el) => el._id === action.payload);
+      let qty = state.cartItem[index].qty;
+      if (qty > 1) {
+        const qtyDec = --qty;
+        state.cartItem[index].qty = qtyDec;
+
+        const price = state.cartItem[index].price;
+        const total = price * qtyDec;
+
+        state.cartItem[index].total = total;
+      }
+    },
   },
 });
 
